@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 여기에 기재하는 객체들은 싱글톤 객체이다. prototype을 적으면 새로운 객체 다수 생성가능 -->
+	<bean class="ex01.SpringTest" id="test" scope="prototype"/>
+	
+	<!-- id = 이름, class=경로  -->
+	<bean id="chef" class="ex02.Chef"/>
+	
+	<!-- ref = 참조할 빈의 아이디 -->
+	<bean id="hotel" class="ex02.Hotel">
+		<constructor-arg ref="chef"/> <!-- 의존성 주입 -->
+	</bean>
+	
+	<!--  -->
+	<bean id="dev" class="ex03.DatabaseDev">
+		<property name="url" value="jdbc:mysql://localhost~~~~" />
+		<property name="uid" value="coding404" />
+		<property name="upw" value="1234"/>
+		
+	</bean>
+	
+	<bean id="memberDAO" class="ex03.MemberDAO">
+		<property name="dataSource" ref="dev"/>
+	</bean>
+</beans>
